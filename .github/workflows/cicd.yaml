@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1 # Using v1 for self-hosted runner compatibility
+        uses: aws-actions/amazon-ecr-login@v2 # Using v1 for self-hosted runner compatibility
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
