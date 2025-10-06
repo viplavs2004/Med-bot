@@ -126,4 +126,5 @@ You should see the **medical chatbot interface**, ready to answer your questions
 
 ## 🖼️ Application Screenshot  
 
-![Medical Chatbot Screenshot]([<replace-with-your-screenshot-link>](https://github.com/viplavs2004/Med-bot/blob/main/med-bot-frontend.PNG))
+![Medical Chatbot Screenshot](https://github.com/viplavs2004/Med-bot/blob/main/med-bot-frontend.PNG)
+
