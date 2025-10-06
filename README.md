@@ -36,8 +36,8 @@ Follow these steps to set up and run the project locally on your machine.
 Open your terminal and clone the project repository:
 
 ```bash
-git clone <your-repository-url>
-cd <your-repository-name>
+git clone https://github.com/viplavs2004/Med-bot
+cd med-bot
 ```
 
 
