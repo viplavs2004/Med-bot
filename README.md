@@ -1,87 +1,85 @@
-# Med-bot
-A RAG-based medical chatbot built with Google's Gemini API, Pinecone vector DB, and Langchain. It uses The Gale Encyclopedia of Medicine as its knowledge source to provide reliable health information.
+Medical Chatbot with RAG and LLM
+This project is a sophisticated, AI-powered medical chatbot that answers user questions based on a specialized knowledge source—the "Gale Encyclopedia of Medicine." It uses a Retrieval-Augmented Generation (RAG) architecture to provide accurate, context-aware responses, preventing the language model from hallucinating and ensuring the answers are grounded in the provided medical text.
 
+The application is built with a FastAPI backend and a user-friendly HTML/CSS/JavaScript frontend.
 
-This tool is useful for:
-- Creating study guides  
-- Summarizing complex documents  
-- Generating FAQs from technical manuals  
+Core Technologies
+Backend Framework: FastAPI
 
-The app provides a clean web interface to upload PDFs, view generated Q&A pairs, and export them as CSV for offline use.  
+LLM Framework: LangChain
 
----
+Language Model (LLM): Google Gemini Pro
 
-## Key Features
-- PDF Upload – Drag-and-drop or file-picker interface for uploading PDF documents.  
-- Automated Q&A Generation – Creates relevant questions and accurate answers from document content.  
-- Web-Based Visualization – Displays Q&A pairs in a clean, easy-to-read card layout.  
-- CSV Export – Download the full Q&A list as a CSV file.  
-- RAG Pipeline – Uses a Retrieval-Augmented Generation (RAG) approach with FAISS vector store for context-aware answers.  
+Vector Database: Pinecone (Free Tier)
 
----
+Embedding Model: Hugging Face sentence-transformers/all-MiniLM-L6-v2
 
-## Technology Stack
-- Backend: Fast api 
-- AI Framework: LangChain  
-- LLM & Embeddings: Google Gemini API (`gemini-pro`, `text-embedding-004`)  
-- Vector Store: FAISS  
-- Frontend: HTML, Tailwind CSS, JavaScript  
+Deployment: Uvicorn ASGI Server
 
----
+Setup and Installation Guide
+Follow these steps to set up and run the project locally on your machine.
 
-## Setup and Installation
+Step 1: Prerequisites
+Python 3.9 or higher.
 
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/viplavs2004/QA-Generator.git
-cd QA-Generator
+A free Pinecone API key.
 
+A Google Gemini API key.
 
-Step 2: Create a Virtual Environment
-# For Windows
-python -m venv venv
-venv\Scripts\activate
+Step 2: Clone the Repository
+Open your terminal and clone the project repository:
 
-# For macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
+git clone <your-repository-url>
+cd <your-repository-name>
 
-Step 3: Install Dependencies
+Step 3: Set Up a Virtual Environment
+It is highly recommended to use a virtual environment to manage project dependencies.
+
+# Create the virtual environment
+python -m venv med-bot-env
+
+# Activate the environment
+# On Windows:
+.\med-bot-env\Scripts\activate
+# On macOS/Linux:
+source med-bot-env/bin/activate
+
+Step 4: Install Dependencies
+Install all the required Python packages from the requirements.txt file.
+
 pip install -r requirements.txt
 
+Step 5: Configure Environment Variables
+You need to provide your secret API keys.
 
-If you don’t have a requirements.txt, generate one using:
+Create a new file named .env in the root directory of the project.
 
-pip freeze > requirements.txt
+Copy and paste the following content into the .env file, replacing the placeholder values with your actual keys.
 
-Step 4: Configure Environment Variables
+# .env file
 
-Create a .env file in the root directory and add your Google API Key:
+# Pinecone API Key
+PINECONE_API_KEY="YOUR_PINECONE_API_KEY"
 
-GOOGLE_API_KEY="YOUR_API_KEY_HERE"
+# Google Gemini API Key
+GOOGLE_API_KEY="YOUR_GEMINI_API_KEY"
 
+Step 6: Prepare and Load Your Data into Pinecone
+Before you can run the chatbot, you must process the source PDF and load it into your Pinecone index.
 
-You can obtain an API key from Google AI Studio
-.
+Check the Source PDF: The "Gale Encyclopedia of Medicine" is already included in the Data/ directory. If you wish to use a different edition or another medical PDF, simply replace the file in this directory.
+
+Run the Indexing Script: Execute the store_index.py script from your terminal. This will automatically create the Pinecone index, process your PDF, and upload the data.
+
+python store_index.py
+
+Note: This process may take a few minutes depending on the size of your document. Wait for it to complete before proceeding.
 
 Running the Application
+Once the setup is complete, you can start the web server by running the app.py file directly. This works because the file includes a script to start the Uvicorn server programmatically.
 
-Start the FastAPI server:
+python app.py
 
-uvicorn app:app --reload
+After starting the server, open your web browser and go to https://www.google.com/url?sa=E&source=gmail&q=http://127.0.0.1:8080. You should see the medical chatbot interface, ready to answer your questions!
 
-
-Open your browser and visit:
-http://127.0.0.1:8000
-
-Usage Guide
-
-Open the Web App → Go to http://127.0.0.1:8000
-
-Upload a PDF → Drag & drop or select a PDF file from your computer
-
-Generate Q&A → Click “Generate Q&A” to process the document
-
-View Results → Generated Q&A pairs will appear on the screen
-
-Download CSV → Export results by clicking “Download CSV”
+Application Screenshot
